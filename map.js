@@ -300,11 +300,23 @@
     setTimeout(paint, 0);
     const range = el.querySelector("input[type=range]");
     const set = (v) => el.style.setProperty("--cut", v + "%");
+    let anim = 0;
     range.addEventListener("input", () => set(range.value));
+    /* pointing at the "On paper" / "With BhuMap" notes slides the divider to show that side */
+    const glide = (to) => { const id = ++anim, from = parseFloat(range.value), t0 = performance.now();
+      const run = (n) => { if (id !== anim) return; const t = Math.min(1, (n - t0) / 450), e = 1 - Math.pow(1 - t, 3), v = from + (to - from) * e; set(v); range.value = v; if (t < 1) requestAnimationFrame(run); };
+      requestAnimationFrame(run); };
+    range.addEventListener("pointerdown", () => anim++);
+    d.querySelectorAll("[data-show]").forEach((n) => {
+      const to = n.dataset.show === "record" ? 88 : 12;
+      n.addEventListener("mouseenter", () => glide(to)); n.addEventListener("focus", () => glide(to));
+      n.addEventListener("mouseleave", () => glide(50)); n.addEventListener("blur", () => glide(50));
+      n.addEventListener("click", () => glide(to));
+    });
     /* a small nudge the first time it scrolls into view, so it reads as draggable */
     if (!reduce && "IntersectionObserver" in window) {
       const io = new IntersectionObserver((es) => { if (!es[0].isIntersecting) return; io.disconnect(); let t0 = null;
-        const run = (n) => { if (t0 === null) t0 = n; const t = (n - t0) / 1600; if (t >= 1) { set(50); range.value = 50; return; } const v = 50 + Math.sin(t * Math.PI * 2) * 18 * (1 - t); set(v); range.value = v; requestAnimationFrame(run); };
+        const mine = anim; const run = (n) => { if (anim !== mine) return; if (t0 === null) t0 = n; const t = (n - t0) / 1600; if (t >= 1) { set(50); range.value = 50; return; } const v = 50 + Math.sin(t * Math.PI * 2) * 18 * (1 - t); set(v); range.value = v; requestAnimationFrame(run); };
         requestAnimationFrame(run); }, { threshold: .6 });
       io.observe(el);
     }

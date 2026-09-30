@@ -433,3 +433,13 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
 .ps-box dl { grid-template-columns: 200px 1fr; }
 @media (max-width: 520px) { .ps-box dl { grid-template-columns: 1fr; } }
 @media (max-width: 600px) { .part-pop { width: min(210px, calc(100% - 20px)); padding: 11px 13px; } .part-pop b { font-size: 16px; } .part-pop p { font-size: 13px; } .part-pop small { display: none; } }
+
+/* the whole village fits on screen: the sheet never grows taller than the window */
+.cmp-sheet { width: min(100%, calc((100svh - var(--nav-h) - 150px) * 1.6 + 26px)); margin-inline: auto; }
+.compare .map-canvas { aspect-ratio: 16 / 10; }
+.cmp-notes { width: min(100%, calc((100svh - var(--nav-h) - 150px) * 1.6 + 26px)); margin-inline: auto; }
+.cmp-notes > div { cursor: pointer; transition: transform .2s, border-color .2s, background .2s, box-shadow .2s; }
+.cmp-notes > div.bad:hover, .cmp-notes > div.bad:focus-visible { transform: translateY(-3px); border-color: #b98a4e; background: #f3e6cb; box-shadow: 0 0 0 3px rgba(185, 138, 78, .2), var(--shadow); }
+.cmp-notes > div.good:hover, .cmp-notes > div.good:focus-visible { transform: translateY(-3px); border-color: var(--field); background: #e2ecd6; box-shadow: 0 0 0 3px rgba(47, 107, 58, .2), var(--shadow); }
+.cmp-notes > div:focus-visible { outline: none; }
+@media (max-width: 700px) { .cmp-sheet, .cmp-notes { width: 100%; } .compare .map-canvas { aspect-ratio: 4 / 3; } }
