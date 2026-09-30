@@ -470,3 +470,18 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
   .cmp-grid .cmp-notes { order: 3; }
   .cmp-grid .cmp-caption { order: 4; }
 }
+
+/* pipeline: six steps in a row, no scrolling; wraps to 3 and 2 columns on smaller screens */
+.pipeline { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); overflow: visible; padding-bottom: 0; gap: 0; }
+.pipeline div { flex: none; margin-right: 0; border-right-width: 0; }
+.pipeline div:last-child { border-right-width: 1px; }
+.pipeline div span { display: block; margin-top: 8px; font-weight: 400; font-size: 13.5px; line-height: 1.45; color: var(--muted); }
+.pipeline div:last-child span { color: #d9e8cf; }
+.pipeline div { transition: background .2s, transform .2s; }
+.pipeline div:not(:last-child):hover { background: #eef3e6; }
+@media (max-width: 1000px) {
+  .pipeline { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .pipeline div, .pipeline div:first-child, .pipeline div:last-child { border-radius: var(--radius); border-right-width: 1px; }
+  .pipeline div:not(:last-child)::after { display: none; }
+}
+@media (max-width: 600px) { .pipeline { grid-template-columns: 1fr 1fr; } }
