@@ -485,3 +485,8 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
   .pipeline div:not(:last-child)::after { display: none; }
 }
 @media (max-width: 600px) { .pipeline { grid-template-columns: 1fr 1fr; } }
+/* every step looks the same; hovering any step tints it */
+.pipeline div:last-child { background: var(--card); color: var(--ink); border-color: var(--line); }
+.pipeline div:last-child small { color: var(--survey); }
+.pipeline div:last-child span { color: var(--muted); }
+.pipeline div:hover, .pipeline div:last-child:hover { background: #eef3e6; }
