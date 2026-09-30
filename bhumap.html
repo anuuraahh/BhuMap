@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The system · BhuMap</title>
+  <meta name="description" content="BhuMap: drone + RTK rover survey of rural agricultural land, with owner-verified boundaries linked to the land record. Team Nostromo, SKCET · SIH 2026 · PS SIH26010.">
+  <meta property="og:title" content="BhuMap · Drone + Rover Land Survey">
+  <meta property="og:description" content="Drone speed with rover-grade legal accuracy. Team Nostromo · SIH 2026 · SIH26010.">
+  <meta name="theme-color" content="#f5efe2">
+  <link rel="icon" href="favicon.png">
+  <script>
+    (function (r) { r.classList.add("js"); try { if (sessionStorage.getItem("bm-turn")) { r.classList.add("arriving"); sessionStorage.removeItem("bm-turn"); } } catch (e) {}
+      setTimeout(function () { if (!window.__siteReady) { r.classList.remove("arriving"); document.querySelectorAll(".rv").forEach(function (e) { e.classList.add("on"); }); } }, 4000); })(document.documentElement);
+  </script>
+  <style>body{background:#f5efe2}.js.arriving body::after{content:"";position:fixed;inset:0;z-index:99;background:#f5efe2}</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a href="index.html" class="brand" data-sheet="BhuMap"><img src="img/nostromo-mark-dark.png" alt="" width="30" height="30"><b>BhuMap</b><small>by Nostromo</small></a>
+    <div class="nav-links">
+      <a href="index.html#problem" data-sheet="BhuMap">Problem</a>
+      <a href="index.html#how" data-sheet="BhuMap">How it works</a>
+      <a href="index.html#compare" data-sheet="BhuMap">Before / after</a>
+      <a href="bhumap.html" data-sheet="The system" aria-current="page">The system</a>
+      <a class="nav-hw" href="hardware.html" data-sheet="Hardware"><svg class="spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.4"/><path d="M12 12 L12 3.5 M12 12 L20.5 12 M12 12 L12 20.5 M12 12 L3.5 12"/></svg>Hardware<em>3D</em></a>
+      <a href="index.html#team" data-sheet="BhuMap">Team</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-hw-m" href="hardware.html" data-sheet="Hardware" aria-label="Hardware: 3D drone and rover"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg>3D</a>
+      <button class="nav-ps" type="button" data-ps><i></i><span>SIH26010</span></button>
+      <button class="nav-menu" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<header class="page-hero">
+  <div class="wrap">
+    <span class="tag">Sheet 02 · <b>The system</b></span>
+    <h1>From one drone sortie to a <em>signed, linked</em> land record.</h1>
+    <p class="lede">BhuMap has two pieces of hardware and three pieces of software. Here's how they connect, and how the survey runs in a real village.</p>
+    <nav class="jump" aria-label="On this page">
+      <a href="#layers">Data layers</a><a href="#tech">Technical approach</a><a href="#pipeline">Pipeline</a><a href="#field">In the field</a><a href="#differs">How it differs</a><a href="#research">Research</a>
+    </nav>
+  </div>
+</header>
+
+<section id="layers" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">01 · Layered data model</span>
+      <h2>Five sheets, one parcel.</h2>
+      <p class="lede">Every parcel in BhuMap is built up from five layers of the same ground. Point at a layer to lift it out of the stack.</p>
+    </div>
+    <div class="layers">
+      <div class="rv" data-stack></div>
+      <div class="layer-list rv">
+        <button type="button" data-layer="4"><span class="k" style="background:#1e2a20">05</span><span><b>RoR / Mutation / Registry</b><span>The land records, linked to each parcel by its ID through APIs.</span></span></button>
+        <button type="button" data-layer="3"><span class="k" style="background:#2f6b3a">04</span><span><b>Parcel polygons</b><span>Owner-verified boundaries in a PostGIS parcel layer. New splits in orange.</span></span></button>
+        <button type="button" data-layer="2"><span class="k" style="background:#d9622b">03</span><span><b>Rover control points</b><span>Cm-level RTK points at doubtful corners, plus ground control that ties the map to the national grid.</span></span></button>
+        <button type="button" data-layer="1"><span class="k" style="background:#3d7c9c">02</span><span><b>Orthomosaic + DSM</b><span>Photogrammetry stitches the frames into one geo-referenced map and an elevation model.</span></span></button>
+        <button type="button" data-layer="0"><span class="k" style="background:#8a8f7c">01</span><span><b>Drone imagery</b><span>Overlapping frames from the RTK drone at 80–100 m, about 2–3 cm per pixel.</span></span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tech">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">02 · Technical approach</span>
+      <h2>Six parts, one workflow.</h2>
+    </div>
+    <div class="tech">
+      <article class="card rv"><span class="no">HARDWARE</span><h3>RTK survey drone</h3><p>A multirotor with RTK/PPK GNSS and a mapping camera. It flies at 80–100 m for a target ground resolution of 2–3 cm per pixel.</p><div class="spec"><span>RTK / PPK</span><span>80–100 m AGL</span><span>2–3 cm/px</span></div></article>
+      <article class="card rv"><span class="no">PROCESSING</span><h3>Orthomosaic + DSM</h3><p>Photogrammetry stitches the images into a geo-referenced map. Ground control points tie it to the national grid.</p><div class="spec"><span>Photogrammetry</span><span>GCPs</span><span>Elevation model</span></div></article>
+      <article class="card rv"><span class="no">HARDWARE</span><h3>RTK rover</h3><p>A GNSS receiver on a pole, corrected by CORS or a local base. It records boundary points to cm level.</p><div class="spec"><span>CORS / base</span><span>Tilt-compensated</span><span>cm-level</span></div></article>
+      <article class="card rv"><span class="no">AI</span><h3>Boundary extraction</h3><p>A segmentation model (U-Net class) proposes bunds and field edges from the orthomosaic. A person reviews every one.</p><div class="spec"><span>U-Net class</span><span>Human review</span></div></article>
+      <article class="card rv"><span class="no">DATA</span><h3>Unified land DB</h3><p>A PostGIS parcel layer, linked by parcel ID to RoR, mutation and registration records through APIs.</p><div class="spec"><span>PostGIS</span><span>Parcel ID</span><span>APIs</span></div></article>
+      <article class="card rv"><span class="no">APP</span><h3>Offline-first app</h3><p>An Android app for field verification. It stores everything locally and syncs when the network returns.</p><div class="spec"><span>Android</span><span>Offline</span><span>Auto-sync</span></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="pipeline" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">03 · Pipeline</span>
+      <h2>Six steps from sky to record.</h2>
+    </div>
+    <div class="pipeline rv">
+      <div><small>01</small>Drone imagery</div>
+      <div><small>02</small>Orthomosaic</div>
+      <div><small>03</small>Rover control points</div>
+      <div><small>04</small>Parcel polygons</div>
+      <div><small>05</small>Owner verification</div>
+      <div><small>06</small>Linked land record</div>
+    </div>
+  </div>
+</section>
+
+<section id="field">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">04 · Feasibility</span>
+      <h2>Built for a village with patchy signal.</h2>
+      <p class="lede">The whole survey runs without a network. Data waits on the tablet and syncs to the district server when it can.</p>
+    </div>
+    <div class="cols3">
+      <div class="col rv"><h3>Field workflow</h3><dl>
+        <dt>Village kick-off</dt><dd>A Gram Sabha notice goes out. Owners mark their boundaries with chalk or pegs.</dd>
+        <dt>Fly, then walk</dt><dd>One drone sortie covers the village. The rover team visits only disputed or unclear boundaries.</dd>
+        <dt>Confirm on site</dt><dd>The owner and the revenue official sign off on the tablet.</dd></dl></div>
+      <div class="col rv"><h3>Field resilience</h3><dl>
+        <dt>Works offline</dt><dd>All capture and verification runs without signal.</dd>
+        <dt>Auto sync</dt><dd>Data uploads to the district server once connected.</dd>
+        <dt>Quality checks</dt><dd>Rover points are compared with the drone map. Large mismatches are flagged for re-survey.</dd></dl></div>
+      <div class="col rv"><h3>Software system</h3><dl>
+        <dt>Officer dashboard</dt><dd>Tracks survey progress by village and parcel status.</dd>
+        <dt>Public map view</dt><dd>Owners can see their parcel and its record status.</dd>
+        <dt>Audit trail</dt><dd>Every edit is time-stamped and signed.</dd></dl></div>
+    </div>
+  </div>
+</section>
+
+<section id="differs" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">05 · How BhuMap differs</span>
+      <h2>Faster than a chain crew. More certain than a drone alone.</h2>
+    </div>
+    <div class="table-wrap rv">
+      <table class="cmp">
+        <thead><tr><th></th><th>Chain &amp; tape</th><th>Drone-only mapping</th><th class="us">BhuMap (drone + rover)</th></tr></thead>
+        <tbody>
+          <tr><th>Coverage speed</th><td>Slow, crew-based</td><td>Fast, whole village</td><td class="us">Fast, whole village</td></tr>
+          <tr><th>Boundary accuracy</th><td>Low, measurement error</td><td>Good, weak under tree cover and unmarked bunds</td><td class="us">Cm-level at doubtful boundaries via rover</td></tr>
+          <tr><th>Owner verification</th><td>Informal, often absent</td><td>Usually done later</td><td class="us">On site, signed on tablet</td></tr>
+          <tr><th>Map-record linkage</th><td>Separate paper records</td><td>Map only, linked later</td><td class="us">Parcel ID tied to RoR at source</td></tr>
+          <tr><th>Dispute handling</th><td>Resolved after the survey</td><td>Resolved after the survey</td><td class="us">Flagged and re-surveyed during the survey</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note">Qualitative comparison based on typical practice. Figures will be added after pilot data.</p>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">06 · Research</span>
+      <h2>Built on what already works.</h2>
+      <p class="lede">BhuMap brings together government practice, survey technology, field reality and our drone + rover hardware in one system.</p>
+    </div>
+    <div class="refs">
+      <div class="ref rv"><b>Government programmes</b><p>SVAMITVA showed drone mapping of rural inhabited land. DILRMP targets digitised, linked land records. ULPIN gives each parcel a unique ID.</p></div>
+      <div class="ref rv" style="border-left-color:var(--water)"><b>Survey technology</b><p>RTK/PPK GNSS and CORS networks give cm-level positioning. Photogrammetry produces orthomosaics and elevation models.</p></div>
+    </div>
+    <div class="gloss rv">
+      <div><b>RTK</b>Real-Time Kinematic</div>
+      <div><b>PPK</b>Post-Processed Kinematic</div>
+      <div><b>CORS</b>Continuously Operating Reference Stations</div>
+      <div><b>RoR</b>Record of Rights</div>
+    </div>
+    <div class="btns rv" style="margin-top:48px">
+      <a class="btn primary" href="hardware.html" data-sheet="Hardware">Next: the drone &amp; rover <span class="arr">→</span></a>
+      <a class="btn" href="index.html" data-sheet="BhuMap">Back to the overview</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Team Nostromo · SKCET · Team ID 178681</span>
+    <span>SIH 2026 · PS <a href="#" data-ps>SIH26010</a> · <span data-clock>--:--:-- IST</span></span>
+  </div>
+</footer>
+
+<script src="site.js?v=4" defer></script>
+<script src="map.js?v=1" defer></script>
+<script src="system.js?v=1" defer></script>
+</body>
+</html>

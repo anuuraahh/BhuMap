@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hardware · BhuMap</title>
+  <meta name="description" content="BhuMap: drone + RTK rover survey of rural agricultural land, with owner-verified boundaries linked to the land record. Team Nostromo, SKCET · SIH 2026 · PS SIH26010.">
+  <meta property="og:title" content="BhuMap · Drone + Rover Land Survey">
+  <meta property="og:description" content="Drone speed with rover-grade legal accuracy. Team Nostromo · SIH 2026 · SIH26010.">
+  <meta name="theme-color" content="#f5efe2">
+  <link rel="icon" href="favicon.png">
+  <script>
+    (function (r) { r.classList.add("js"); try { if (sessionStorage.getItem("bm-turn")) { r.classList.add("arriving"); sessionStorage.removeItem("bm-turn"); } } catch (e) {}
+      setTimeout(function () { if (!window.__siteReady) { r.classList.remove("arriving"); document.querySelectorAll(".rv").forEach(function (e) { e.classList.add("on"); }); } }, 4000); })(document.documentElement);
+  </script>
+  <style>body{background:#f5efe2}.js.arriving body::after{content:"";position:fixed;inset:0;z-index:99;background:#f5efe2}</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a href="index.html" class="brand" data-sheet="BhuMap"><img src="img/nostromo-mark-dark.png" alt="" width="30" height="30"><b>BhuMap</b><small>by Nostromo</small></a>
+    <div class="nav-links">
+      <a href="index.html#problem" data-sheet="BhuMap">Problem</a>
+      <a href="index.html#how" data-sheet="BhuMap">How it works</a>
+      <a href="index.html#compare" data-sheet="BhuMap">Before / after</a>
+      <a href="bhumap.html" data-sheet="The system">The system</a>
+      <a class="nav-hw" href="hardware.html" data-sheet="Hardware" aria-current="page"><svg class="spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.4"/><path d="M12 12 L12 3.5 M12 12 L20.5 12 M12 12 L12 20.5 M12 12 L3.5 12"/></svg>Hardware<em>3D</em></a>
+      <a href="index.html#team" data-sheet="BhuMap">Team</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-hw-m" href="hardware.html" data-sheet="Hardware" aria-label="Hardware: 3D drone and rover"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg>3D</a>
+      <button class="nav-ps" type="button" data-ps><i></i><span>SIH26010</span></button>
+      <button class="nav-menu" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<header class="page-hero">
+  <div class="wrap">
+    <span class="tag">Sheet 03 · <b>Hardware</b></span>
+    <h1>One drone in the air. <em>One rover</em> on the bund.</h1>
+    <p class="lede">The drone gives the whole village in one sortie. The rover settles the corners the camera can't: under trees, on unmarked bunds, wherever two owners disagree.</p>
+    <nav class="jump" aria-label="On this page"><a href="#viewer">3D models</a><a href="#cad">CAD renders</a><a href="#kit">Field kit</a><a href="#build">Build plan</a><a href="#roadmap">Roadmap</a></nav>
+  </div>
+</header>
+
+<section id="viewer" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">01 · Interactive model</span>
+      <h2>Turn it over. Pick a part.</h2>
+      <p class="lede">Concept models built from our CAD. Drag to rotate, then pick a numbered part to see what it does.</p>
+    </div>
+    <div class="viewer">
+      <div class="sheet rv">
+        <div class="sheet-bar"><span><b data-model-name>Survey drone · RTK quadcopter</b></span><span>concept model</span></div>
+        <div class="map-canvas" data-viewer><canvas aria-label="3D model you can drag to rotate. Numbered markers show the main parts."></canvas><span class="v-hint">⟲ drag to rotate · tap a number</span></div>
+      </div>
+      <div class="rv">
+        <div class="v-tabs" role="group" aria-label="Choose a model"><button type="button" data-model="drone" aria-pressed="true">Survey drone</button><button type="button" data-model="rover" aria-pressed="false">Field rover</button></div>
+        <div class="parts" data-parts></div>
+        <div class="v-spec" data-specs></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cad">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">02 · CAD prototype</span>
+      <h2>From our CAD model.</h2>
+      <p class="lede">The survey drone carries the RTK GNSS module, the mapping camera and the flight controller. The field rover carries the GNSS antenna, a tablet cradle, the battery with IMU, and a bipod.</p>
+    </div>
+    <div class="cad">
+      <figure class="rv"><img src="img/cad/drone-cad.jpg" width="950" height="478" alt="CAD render of the RTK survey quadcopter with GNSS antenna, mapping camera, quad arms and landing skids" loading="lazy"><figcaption>Survey drone · RTK quadcopter. Payload: RTK GNSS module, mapping camera, flight controller.</figcaption></figure>
+      <figure class="rv"><img src="img/cad/rover-cad.jpg" width="199" height="569" alt="CAD render of the RTK field rover: GNSS antenna on a pole with a tablet cradle, battery and bipod" loading="lazy"><figcaption>Field rover · RTK pole.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="kit" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">03 · Field kit</span>
+      <h2>What goes to the village.</h2>
+    </div>
+    <div class="cards3">
+      <article class="card rv"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><rect x="18" y="18" width="12" height="10" rx="2"/><path d="M18 20L8 12M30 20l10-8M18 26L8 34M30 26l10 8"/><path d="M3 12h10M35 12h10M3 34h10M35 34h10" stroke="#d9622b"/><circle cx="24" cy="12" r="3"/></svg><span class="no">DRONE PAYLOAD</span><h3>RTK drone</h3><p>RTK GNSS, a mapping camera and 30+ minutes of flight. One sortie covers a village.</p></article>
+      <article class="card rv"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 12v32"/><circle cx="24" cy="8" r="4"/><rect x="26" y="20" width="12" height="9" rx="1"/><path d="M24 26l-8 18M24 26l8 18"/></svg><span class="no">ROVER KIT</span><h3>RTK rover</h3><p>A pole-mounted RTK receiver with a tablet and a battery that lasts a full field day.</p></article>
+      <article class="card rv"><svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 22v20M16 42h16"/><path d="M14 14a14 14 0 0 1 20 0M18 18a8 8 0 0 1 12 0"/><circle cx="24" cy="22" r="2.5"/></svg><span class="no">BASE OPTION</span><h3>CORS or portable base</h3><p>Use CORS corrections where available. Bring a portable base station to remote areas.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">04 · Prototype workflow</span>
+      <h2>How we build it.</h2>
+    </div>
+    <div class="flow4">
+      <div class="rv"><b>CAD model</b><span>Drone and rover designed first, so every part has a place.</span></div>
+      <div class="rv"><b>Frame</b><span>3D-printed or off-the-shelf frame and pole.</span></div>
+      <div class="rv"><b>RTK integration</b><span>GNSS modules, corrections and logging wired in.</span></div>
+      <div class="rv"><b>Field trial</b><span>A first survey in a pilot village.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="roadmap" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">05 · Development &amp; build roadmap</span>
+      <h2>Five stages to scale.</h2>
+    </div>
+    <div class="roadmap rv">
+      <div><small>STAGE 1</small><b>Drone + rover hardware integration</b><span>RTK modules on both, time-synced.</span></div>
+      <div><small>STAGE 2</small><b>Photogrammetry &amp; boundary AI</b><span>Orthomosaic pipeline and edge proposals.</span></div>
+      <div><small>STAGE 3</small><b>Mobile app + GIS backend</b><span>Offline verification app, PostGIS parcels.</span></div>
+      <div><small>STAGE 4</small><b>Pilot village survey</b><span>Fly, walk, verify, sync, and measure it.</span></div>
+      <div><small>STAGE 5</small><b>RoR linkage &amp; scale-up</b><span>Link parcels to records and grow district by district.</span></div>
+    </div>
+    <div class="btns rv" style="margin-top:56px">
+      <a class="btn primary" href="index.html#team" data-sheet="BhuMap">Meet the team <span class="arr">→</span></a>
+      <a class="btn" href="bhumap.html" data-sheet="The system">How the system works</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Team Nostromo · SKCET · Team ID 178681</span>
+    <span>SIH 2026 · PS <a href="#" data-ps>SIH26010</a> · <span data-clock>--:--:-- IST</span></span>
+  </div>
+</footer>
+
+<script src="site.js?v=4" defer></script>
+<script src="models3d.js?v=4" defer></script>
+</body>
+</html>

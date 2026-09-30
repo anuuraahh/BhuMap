@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BhuMap</title>
+  <meta name="description" content="BhuMap: drone + RTK rover survey of rural agricultural land, with owner-verified boundaries linked to the land record. Team Nostromo, SKCET · SIH 2026 · PS SIH26010.">
+  <meta property="og:title" content="BhuMap · Drone + Rover Land Survey">
+  <meta property="og:description" content="Drone speed with rover-grade legal accuracy. Team Nostromo · SIH 2026 · SIH26010.">
+  <meta name="theme-color" content="#f5efe2">
+  <link rel="icon" href="favicon.png">
+  <script>
+    (function (r) { r.classList.add("js"); try { if (sessionStorage.getItem("bm-turn")) { r.classList.add("arriving"); sessionStorage.removeItem("bm-turn"); } } catch (e) {}
+      setTimeout(function () { if (!window.__siteReady) { r.classList.remove("arriving"); document.querySelectorAll(".rv").forEach(function (e) { e.classList.add("on"); }); } }, 4000); })(document.documentElement);
+  </script>
+  <style>body{background:#f5efe2}.js.arriving body::after{content:"";position:fixed;inset:0;z-index:99;background:#f5efe2}</style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="styles.css?v=4">
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a href="index.html" class="brand" data-sheet="BhuMap"><img src="img/nostromo-mark-dark.png" alt="" width="30" height="30"><b>BhuMap</b><small>by Nostromo</small></a>
+    <div class="nav-links">
+      <a href="#problem">Problem</a>
+      <a href="#how">How it works</a>
+      <a href="#compare">Before / after</a>
+      <a href="#impact">Impact</a>
+      <a href="bhumap.html" data-sheet="The system">The system</a>
+      <a class="nav-hw" href="hardware.html" data-sheet="Hardware"><svg class="spin" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="2.4"/><path d="M12 12 L12 3.5 M12 12 L20.5 12 M12 12 L12 20.5 M12 12 L3.5 12"/></svg>Hardware<em>3D</em></a>
+      <a href="#team">Team</a>
+    </div>
+    <div class="nav-right">
+      <a class="nav-hw-m" href="hardware.html" data-sheet="Hardware" aria-label="Hardware: 3D drone and rover"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg>3D</a>
+      <button class="nav-ps" type="button" data-ps><i></i><span>SIH26010</span></button>
+      <button class="nav-menu" type="button" aria-label="Menu" aria-expanded="false"><i></i><i></i></button>
+    </div>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="tag">SIH 2026 · <b>SIH26010</b> · Agriculture &amp; Rural Development</span>
+      <h1>Every field,<br>measured to the <em>centimetre.</em></h1>
+      <p class="lede">BhuMap resurveys a village with an RTK drone and a field rover. Owners confirm their boundaries on site, and each parcel is linked to its land record the same day.</p>
+      <div class="btns">
+        <a class="btn primary" href="#how">See how it works <span class="arr">→</span></a>
+        <button class="btn" type="button" data-ps>Problem statement</button>
+      </div>
+      <div class="hero-meta">
+        <div><b>2–5 cm</b>target boundary accuracy</div>
+        <div><b>1 parcel ID</b>tied to RoR at source</div>
+        <div><b>Days, not months</b>per village</div>
+      </div>
+    </div>
+    <div class="sheet rv">
+      <div class="sheet-bar"><span><b>Survey sheet 01</b><span> · Village (illustrative)</span></span><span class="live"><i></i><span data-stage>drone · aerial capture</span></span></div>
+      <div class="map-canvas" data-survey><canvas aria-label="Animation: a drone flies over a village in passes, the aerial map fills in behind it, field boundaries outline themselves, then a rover checks the doubtful corners"></canvas><a class="hw-chip" href="hardware.html" data-sheet="Hardware"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l9 5v10l-9 5-9-5V7z"/><path d="M12 12l9-5M12 12v10M12 12L3 7"/></svg>See the drone &amp; rover in 3D <span>→</span></a></div>
+      <div class="sheet-foot">
+        <div class="legend"><span><i></i>parcel</span><span><i class="d"></i>new split</span><span><i class="o"></i>rover point</span></div>
+        <span>coverage <b data-cov>0%</b> · parcels <b data-parcels>0</b></span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="problem" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">01 · The problem</span>
+      <h2>The map says one thing. The field says another.</h2>
+      <p class="lede">Rural land in India is still largely measured with chain and tape, sometimes from surveys a century old. Families have divided land, sold parts of it and moved bunds since, and the records never caught up.</p>
+    </div>
+    <div class="cards3">
+      <article class="card rv">
+        <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><path d="M6 36 L18 30 L30 36 L42 30 V12 L30 18 L18 12 L6 18 Z"/><path d="M18 12v18M30 18v18"/><path d="M34 6l6 6M40 6l-6 6" stroke="#d9622b"/></svg>
+        <span class="no">01</span><h3>Outdated ground truth</h3>
+        <p>Chain-and-tape surveys, some from the colonial era, no longer match real boundaries after partition and inheritance.</p>
+      </article>
+      <article class="card rv">
+        <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="16" height="22" rx="2"/><rect x="27" y="17" width="16" height="22" rx="2"/><path d="M9 15h8M9 20h8M9 25h5M31 23h8M31 28h8M31 33h5"/><path d="M21 20c3 0 3 8 6 8" stroke="#d9622b" stroke-dasharray="2 3"/></svg>
+        <span class="no">02</span><h3>Map ≠ record</h3>
+        <p>Cadastral maps, Record of Rights, mutation and registration data live in separate systems and rarely agree.</p>
+      </article>
+      <article class="card rv">
+        <svg class="ic" viewBox="0 0 48 48" aria-hidden="true"><path d="M8 40h32M14 40V20M34 40V20M10 20h28L24 8z"/><path d="M20 28h8M20 33h8"/><circle cx="38" cy="10" r="5" stroke="#d9622b"/><path d="M38 7.5V10l1.8 1.2" stroke="#d9622b"/></svg>
+        <span class="no">03</span><h3>Disputes &amp; delay</h3>
+        <p>Encroachments, unrecorded sales and overlapping claims feed long civil litigation.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="uvp">
+  <div class="wrap rv">
+    <span class="tag">Our answer</span>
+    <blockquote><em>Drone speed</em> with <u>rover-grade legal accuracy.</u></blockquote>
+    <p class="lede" style="margin:28px auto 0">Every boundary is verified by its owner on site and linked to its land record the same day.</p>
+  </div>
+</section>
+
+<section id="how" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">02 · How BhuMap works</span>
+      <h2>Fly, walk, verify, sync.</h2>
+      <p class="lede">The drone covers the whole village in one sortie. The rover only goes where a boundary is in doubt. Owners and the revenue official sign off in the field.</p>
+    </div>
+    <div class="steps">
+      <div class="step rv">
+        <span class="n">1</span>
+        <svg viewBox="0 0 200 120" aria-hidden="true"><g fill="none" stroke="#c9b994"><path d="M10 100 L60 88 L120 96 L190 84"/><path d="M10 112 L70 104 L130 110 L190 100"/></g><rect x="40" y="62" width="120" height="40" fill="rgba(47,107,58,.12)" stroke="#2f6b3a" stroke-dasharray="5 4"/><g transform="translate(100 34)"><path d="M-22-10L22 10M-22 10L22-10" stroke="#1e2a20" stroke-width="4" stroke-linecap="round"/><rect x="-9" y="-7" width="18" height="14" rx="2" fill="#1e2a20"/><g fill="#d9622b"><rect x="-32" y="-12" width="20" height="3" rx="1.5"/><rect x="12" y="9" width="20" height="3" rx="1.5"/></g><g fill="#c9b994"><rect x="12" y="-12" width="20" height="3" rx="1.5"/><rect x="-32" y="9" width="20" height="3" rx="1.5"/></g></g><path d="M100 48 L60 62 M100 48 L140 62" stroke="#2f6b3a" stroke-dasharray="2 3"/></svg>
+        <h3>Aerial capture</h3><p>An RTK drone maps the whole village at 80–100 m, about 2–3 cm per pixel.</p>
+      </div>
+      <div class="step rv">
+        <span class="n">2</span>
+        <svg viewBox="0 0 200 120" aria-hidden="true"><path d="M20 104 L180 96" stroke="#c9b994" stroke-width="2"/><path d="M100 30 V100" stroke="#1e2a20" stroke-width="3"/><path d="M100 100 L100 108" stroke="#1e2a20" stroke-width="3"/><path d="M100 70 L82 104 M100 70 L118 104" stroke="#5f6a58" stroke-width="2"/><circle cx="100" cy="24" r="10" fill="#3d7c9c"/><rect x="104" y="54" width="26" height="18" rx="2" fill="#1e2a20"/><path d="M92 106 l8-6 8 6 -8 6z" fill="#d9622b"/><path d="M60 22a52 52 0 0 1 80 0M72 34a36 36 0 0 1 56 0" fill="none" stroke="#3d7c9c" stroke-dasharray="3 4"/></svg>
+        <h3>Ground truth</h3><p>The RTK rover logs cm-level points at the boundaries that the drone map can't settle.</p>
+      </div>
+      <div class="step rv">
+        <span class="n">3</span>
+        <svg viewBox="0 0 200 120" aria-hidden="true"><rect x="58" y="14" width="84" height="98" rx="8" fill="#fbf8f1" stroke="#1e2a20" stroke-width="3"/><path d="M70 30 L130 26 L134 70 L68 74 Z" fill="#dfe8d2" stroke="#2f6b3a" stroke-width="2"/><path d="M100 28 L101 72" stroke="#d9622b" stroke-width="2" stroke-dasharray="4 3"/><path d="M72 88 q10-10 18 0 t18 0" fill="none" stroke="#1e2a20" stroke-width="2"/><circle cx="124" cy="92" r="9" fill="#2f6b3a"/><path d="M119 92l3.5 3.5 6-6" stroke="#fff" stroke-width="2.5" fill="none"/></svg>
+        <h3>Verify</h3><p>The owner and the revenue official confirm each boundary and sign on the tablet.</p>
+      </div>
+      <div class="step rv">
+        <span class="n">4</span>
+        <svg viewBox="0 0 200 120" aria-hidden="true"><path d="M30 60 L80 44 L90 80 L36 92 Z" fill="#dfe8d2" stroke="#2f6b3a" stroke-width="2"/><text x="60" y="70" font-family="IBM Plex Mono, monospace" font-size="11" fill="#2f6b3a" text-anchor="middle">214/2</text><path d="M96 64 H120" stroke="#1e2a20" stroke-width="2" stroke-dasharray="4 3"/><path d="M116 58 l6 6 -6 6" fill="none" stroke="#1e2a20" stroke-width="2"/><g fill="#fbf8f1" stroke="#1e2a20" stroke-width="2"><rect x="128" y="30" width="46" height="18" rx="3"/><rect x="128" y="54" width="46" height="18" rx="3"/><rect x="128" y="78" width="46" height="18" rx="3"/></g><g font-family="IBM Plex Mono, monospace" font-size="9" fill="#1e2a20" text-anchor="middle"><text x="151" y="42">RoR</text><text x="151" y="66">Mutation</text><text x="151" y="90">Registry</text></g></svg>
+        <h3>Sync</h3><p>The parcel gets a geo-referenced ID, linked to RoR, mutation and registration data in GIS.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">03 · Before / after</span>
+      <h2>Drag across the village.</h2>
+      <p class="lede">Left, the old chain-and-tape sheet: one number per holding, drawn by hand and a little off. Right, the same land mapped by BhuMap: today's parcels, every split in orange, each one with its own ID.</p>
+    </div>
+    <div class="sheet rv">
+      <div class="sheet-bar"><span><b>Survey sheet 02</b><span> · Record vs field</span></span><span>drag ⟷</span></div>
+      <div class="compare" data-compare>
+        <div class="map-canvas">
+          <div class="before" style="position:absolute;inset:0"><canvas aria-label="Old hand-drawn survey sheet of the village"></canvas></div>
+          <div class="after"><canvas aria-label="BhuMap aerial map with today's parcels and IDs"></canvas></div>
+          <span class="lab l">Chain &amp; tape record</span><span class="lab r">BhuMap</span>
+          <div class="handle"><b>⟷</b></div>
+          <input type="range" min="0" max="100" value="50" step="0.1" aria-label="Move the divider between the old record and the BhuMap survey">
+        </div>
+      </div>
+    </div>
+    <div class="cmp-notes rv">
+      <div><b>On paper</b>Holdings that were divided years ago still show as one survey number, and the lines sit a few metres off the bunds.</div>
+      <div class="good"><b>With BhuMap</b>Each split becomes its own parcel (194 → 194/1, 194/2) with rover-checked corners and a link to its record.</div>
+    </div>
+    <p class="cmp-caption">Illustrative village. Figures and boundaries are made up to show the idea; pilot data comes next.</p>
+  </div>
+</section>
+
+<section id="impact" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">04 · Why BhuMap</span>
+      <h2>Two layers of accuracy, one linked record.</h2>
+    </div>
+    <div class="why">
+      <div class="why-list rv">
+        <div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M6 26l14 8 14-8M6 18l14 8 14-8M20 4L6 12l14 8 14-8z"/></svg><div><h3>Two-layer accuracy</h3><p>The drone gives fast, full coverage. The RTK rover gives cm-level ground truth at every doubtful boundary point.</p></div></div>
+        <div><svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="15" cy="13" r="6"/><path d="M4 34c0-7 5-11 11-11s11 4 11 11"/><path d="M26 20l4 4 7-8"/></svg><div><h3>Owner-verified boundaries</h3><p>The farmer and the revenue official confirm each boundary on site in the mobile app.</p></div></div>
+        <div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M16 24a6 6 0 0 1 0-8l5-5a6 6 0 0 1 8 8l-2 2"/><path d="M24 16a6 6 0 0 1 0 8l-5 5a6 6 0 0 1-8-8l2-2"/></svg><div><h3>One linked record</h3><p>Every parcel gets a geo-referenced ID tied to RoR, mutation and registration data.</p></div></div>
+        <div><svg viewBox="0 0 40 40" aria-hidden="true"><path d="M4 30l8-8 6 6 10-12 8 8"/><path d="M4 36h32"/></svg><div><h3>Speed &amp; cost</h3><p>Drones cover villages far faster than chain crews. Rovers are sent only where a boundary needs confirming.</p></div></div>
+      </div>
+      <div>
+        <div class="metrics rv">
+          <div class="metric"><b>2–5<small>cm</small></b><span><strong>Boundary accuracy</strong>RTK drone + rover (target)</span></div>
+          <div class="metric"><b>1</b><span><strong>Unique parcel ID</strong>tied to RoR, mutation &amp; registry</span></div>
+          <div class="metric"><b>Days</b><span><strong>Per village survey</strong>one sortie, rover where needed</span></div>
+        </div>
+        <p class="note">Target metrics. We'll replace them with measured figures after the pilot village.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="deploy">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">05 · Where it's used</span>
+      <h2>Built for the people who keep the record.</h2>
+    </div>
+    <div class="domains">
+      <div class="dom rv"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M5 30h24M8 30V14M26 30V14M4 14h26L17 4z"/></svg><b>Revenue depts</b><span>State survey and resurvey drives</span></div>
+      <div class="dom rv"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M4 30V16l7-5 7 5v14M18 30V12l6-5 6 5v18M4 30h26"/></svg><b>Gram panchayats</b><span>Village-level mapping</span></div>
+      <div class="dom rv"><svg viewBox="0 0 34 34" aria-hidden="true"><rect x="7" y="4" width="20" height="26" rx="2"/><path d="M11 11h12M11 16h12M11 21h7"/></svg><b>Land records</b><span>RoR and mutation updates</span></div>
+      <div class="dom rv"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 30V14M17 18c-6 0-9-4-9-9 6 0 9 4 9 9zM17 22c6 0 9-4 9-9-6 0-9 4-9 9z"/></svg><b>Agri schemes</b><span>Verified plots for benefits</span></div>
+      <div class="dom rv"><svg viewBox="0 0 34 34" aria-hidden="true"><path d="M17 4v26M8 30h18M6 10h22M6 10l-3 9a4 4 0 0 0 6 0zM28 10l-3 9a4 4 0 0 0 6 0z"/></svg><b>Courts &amp; tribunals</b><span>Evidence for boundary cases</span></div>
+    </div>
+    <div class="btns rv" style="margin-top:44px">
+      <a class="btn primary" href="bhumap.html" data-sheet="The system">Inside the system <span class="arr">→</span></a>
+      <a class="btn" href="hardware.html" data-sheet="Hardware">See the drone &amp; rover <span class="arr">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="team" class="band">
+  <div class="wrap">
+    <div class="section-head rv">
+      <span class="tag">06 · Team Nostromo</span>
+      <h2>The survey crew.</h2>
+      <p class="lede">Six students from Sri Krishna College of Engineering and Technology, Coimbatore. Team ID 178681.</p>
+    </div>
+    <div class="people">
+      <article class="person rv"><div class="photo"><img src="img/team/member1.jpg" width="800" height="1000" alt="Hariz Rahman" loading="lazy"></div><div class="who"><h3>Hariz Rahman</h3><div class="dept">III Year · B.E. EEE</div><a href="https://www.linkedin.com/in/hariz-rahman-6203bb330/" target="_blank" rel="noopener">LinkedIn ↗</a></div></article>
+      <article class="person rv"><div class="photo"><img src="img/team/member2.jpg" width="800" height="1000" alt="Rohit R" loading="lazy"></div><div class="who"><h3>Rohit R</h3><div class="dept">III Year · B.E. EEE</div><a href="https://www.linkedin.com/in/rohit-r-14b371326/" target="_blank" rel="noopener">LinkedIn ↗</a></div></article>
+      <article class="person rv"><div class="photo"><img src="img/team/member3.jpg" width="800" height="1000" alt="Jyothi Anu Raagga" loading="lazy"></div><div class="who"><h3>Jyothi Anu Raagga</h3><div class="dept">III Year · B.E. CSE</div><a href="https://www.linkedin.com/in/jyothi-anu-raagga-443ba921a/" target="_blank" rel="noopener">LinkedIn ↗</a></div></article>
+      <article class="person rv"><div class="photo"><img src="img/team/member4.jpg" width="800" height="1000" alt="Sarveshvar S" loading="lazy"></div><div class="who"><h3>Sarveshvar S</h3><div class="dept">III Year · B.Tech IT</div><a href="https://www.linkedin.com/in/sarveshvar-s-218715277/" target="_blank" rel="noopener">LinkedIn ↗</a></div></article>
+      <article class="person rv"><div class="photo"><img src="img/team/member5.jpg" width="800" height="1000" alt="Muthu Ezhil M" loading="lazy"></div><div class="who"><h3>Muthu Ezhil M</h3><div class="dept">IV Year · B.E. EEE</div><a href="https://www.linkedin.com/in/muthu-ezhil-929463276/" target="_blank" rel="noopener">LinkedIn ↗</a></div></article>
+      <article class="person rv"><div class="photo"><img src="img/team/member6.jpg" width="800" height="1000" alt="Pubeshvaran S G" loading="lazy"></div><div class="who"><h3>Pubeshvaran S G</h3><div class="dept">IV Year · B.E. EEE</div><a href="https://www.linkedin.com/in/pubeshvaran-s-g-9a26b7318/" target="_blank" rel="noopener">LinkedIn ↗</a></div></article>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap rv">
+    <span class="tag" style="justify-content:center">07 · Contact</span>
+    <h2>Have a village<br>we should <em>survey?</em></h2>
+    <button class="mail" type="button" data-email="727724euee044@skcet.ac.in">727724euee044@skcet.ac.in <small>click to copy</small></button>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Team Nostromo · SKCET · Team ID 178681</span>
+    <span>SIH 2026 · PS <a href="#" data-ps>SIH26010</a> · <span data-clock>--:--:-- IST</span></span>
+  </div>
+</footer>
+
+<script src="site.js?v=4" defer></script>
+<script src="map.js?v=1" defer></script>
+</body>
+</html>
