@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&family=IBM+Plex+Mono:wght@400;500;600&family=Inter+Tight:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=6">
 </head>
 <body>
 
@@ -137,11 +137,18 @@
 </section>
 
 <section id="compare">
-  <div class="wrap">
-    <div class="section-head rv">
-      <span class="tag">03 · Before / after</span>
-      <h2>Drag across the village.</h2>
-      <p class="lede">Left, the old chain-and-tape sheet: one number per holding, drawn by hand and a little off. Right, the same land mapped by BhuMap: today's parcels, every split in orange, each one with its own ID.</p>
+  <div class="wrap cmp-grid">
+    <div class="cmp-side">
+      <div class="section-head rv">
+        <span class="tag">03 · Before / after</span>
+        <h2>Drag across the village.</h2>
+        <p class="lede">Left, the old chain-and-tape sheet. Right, the same land mapped by BhuMap, with every split in orange and its own ID.</p>
+      </div>
+      <div class="cmp-notes rv">
+        <div class="bad" data-show="record" tabindex="0"><b>On paper</b>Holdings divided years ago still show as one survey number, and the lines sit a few metres off the bunds.</div>
+        <div class="good" data-show="bhumap" tabindex="0"><b>With BhuMap</b>Each split becomes its own parcel (194 → 194/1, 194/2) with rover-checked corners and a link to its record.</div>
+      </div>
+      <p class="cmp-caption">Illustrative village, made up to show the idea. Pilot data comes next.</p>
     </div>
     <div class="sheet rv cmp-sheet">
       <div class="sheet-bar"><span><b>Survey sheet 02</b><span> · Record vs field</span></span><span>drag ⟷</span></div>
@@ -155,11 +162,6 @@
         </div>
       </div>
     </div>
-    <div class="cmp-notes rv">
-      <div class="bad" data-show="record" tabindex="0"><b>On paper</b>Holdings that were divided years ago still show as one survey number, and the lines sit a few metres off the bunds.</div>
-      <div class="good" data-show="bhumap" tabindex="0"><b>With BhuMap</b>Each split becomes its own parcel (194 → 194/1, 194/2) with rover-checked corners and a link to its record.</div>
-    </div>
-    <p class="cmp-caption">Illustrative village. Figures and boundaries are made up to show the idea; pilot data comes next.</p>
   </div>
 </section>
 
