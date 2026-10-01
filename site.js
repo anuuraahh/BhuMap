@@ -149,7 +149,7 @@
     if (s) { s.textContent = "copied ✓"; setTimeout(() => (s.textContent = "click to copy"), 2000); }
   }));
 
-  /* ---------- live survey clock in the footer ---------- */
-  const clk = d.querySelector("[data-clock]");
-  if (clk) { const tick = () => { clk.textContent = new Date().toLocaleTimeString("en-IN", { hour12: false, timeZone: "Asia/Kolkata" }) + " IST"; }; tick(); setInterval(tick, 1000); }
+  /* ---------- live IST clocks in the navigation and footer ---------- */
+  const clocks = d.querySelectorAll("[data-clock]");
+  if (clocks.length) { const tick = () => { const time = new Date().toLocaleTimeString("en-IN", { hour12: false, hour: "2-digit", minute: "2-digit", second: "2-digit", timeZone: "Asia/Kolkata" }) + " IST"; clocks.forEach((clock) => { clock.textContent = time; }); }; tick(); setInterval(tick, 1000); }
 })();
