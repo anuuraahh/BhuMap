@@ -490,3 +490,14 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
 .pipeline div:last-child small { color: var(--survey); }
 .pipeline div:last-child span { color: var(--muted); }
 .pipeline div:hover, .pipeline div:last-child:hover { background: #eef3e6; }
+
+/* Wheeled rover in the Ground truth card. */
+.rover-step .rover-drive { animation: rover-drive 3s ease-in-out infinite; }
+.rover-step .rover-wheel { transform-origin: var(--wheel-x) var(--wheel-y); animation: rover-wheel 1.5s linear infinite; }
+.rover-step .rover-signal { animation: rover-signal 1.8s ease-out infinite; }
+.rover-step .rover-scan { transform-origin: 71px 109px; animation: rover-scan 1.8s ease-out infinite; }
+@keyframes rover-drive { 0%, 100% { transform: translateX(-3px); } 50% { transform: translateX(3px); } }
+@keyframes rover-wheel { to { transform: rotate(360deg); } }
+@keyframes rover-signal { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+@keyframes rover-scan { from { transform: scale(.5); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .rover-step .rover-drive, .rover-step .rover-wheel, .rover-step .rover-signal, .rover-step .rover-scan { animation: none; } }

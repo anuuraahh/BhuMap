@@ -119,7 +119,29 @@
       </div>
       <div class="step rv">
         <span class="n">2</span>
-        <svg viewBox="0 0 200 120" aria-hidden="true"><path d="M20 104 L180 96" stroke="#c9b994" stroke-width="2"/><path d="M100 30 V100" stroke="#1e2a20" stroke-width="3"/><path d="M100 100 L100 108" stroke="#1e2a20" stroke-width="3"/><path d="M100 70 L82 104 M100 70 L118 104" stroke="#5f6a58" stroke-width="2"/><circle cx="100" cy="24" r="10" fill="#3d7c9c"/><rect x="104" y="54" width="26" height="18" rx="2" fill="#1e2a20"/><path d="M92 106 l8-6 8 6 -8 6z" fill="#d9622b"/><path d="M60 22a52 52 0 0 1 80 0M72 34a36 36 0 0 1 56 0" fill="none" stroke="#3d7c9c" stroke-dasharray="3 4"/></svg>
+        <svg class="rover-step" viewBox="0 0 200 120" role="img" aria-label="Animated four-wheel rover with a blue GNSS antenna, green electronics enclosure and orange survey sensor">
+          <path d="M20 104 L180 96" stroke="#c9b994" stroke-width="2"/>
+          <ellipse cx="104" cy="103" rx="54" ry="6" fill="#1e2a20" opacity=".1"/>
+          <g class="rover-drive">
+            <g fill="#24282c" stroke="#171b1e" stroke-width="5"><ellipse cx="71" cy="83" rx="10" ry="15"/><ellipse cx="145" cy="78" rx="10" ry="15"/></g>
+            <path d="M59 72 L125 54 L155 69 L89 90 Z" fill="#83898e"/>
+            <path d="M59 72 L89 90 L89 99 L59 81 Z" fill="#32373b"/>
+            <path d="M89 90 L155 69 L155 79 L89 99 Z" fill="#24282c"/>
+            <path d="M75 54 L109 44 L129 53 L95 64 Z" fill="#12824b"/>
+            <path d="M75 54 L95 64 L95 81 L75 71 Z" fill="#272b2f"/>
+            <path d="M95 64 L129 53 L129 71 L95 81 Z" fill="#343a3e"/>
+            <path d="M80 58 V22" stroke="#808985" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="80" cy="18" r="10" fill="#096292"/><path d="M73 13 Q79 6 85 12" fill="none" stroke="#2582b2" stroke-width="2"/>
+            <path d="M136 52 V44" stroke="#24282c" stroke-width="11"/><ellipse cx="136" cy="43" rx="5.5" ry="2.5" fill="#0872a5"/>
+            <g fill="#24282c" stroke="#171b1e" stroke-width="5"><ellipse cx="57" cy="94" rx="10" ry="15"/><ellipse cx="111" cy="100" rx="10" ry="15"/></g>
+            <g class="rover-wheel" style="--wheel-x:57px;--wheel-y:94px"><ellipse cx="57" cy="94" rx="5" ry="9" fill="#a1a6a9"/><path d="M57 86 V102 M54 94 H60" stroke="#575d62" stroke-width="2"/></g>
+            <g class="rover-wheel" style="--wheel-x:111px;--wheel-y:100px"><ellipse cx="111" cy="100" rx="5" ry="9" fill="#a1a6a9"/><path d="M111 92 V108 M108 100 H114" stroke="#575d62" stroke-width="2"/></g>
+            <path d="M71 80 V94" stroke="#b76b18" stroke-width="9"/><ellipse cx="71" cy="80" rx="4.5" ry="2" fill="#dc942c"/>
+            <path d="M67 98 H75 L71 108 Z" fill="#bd3026"/>
+            <g class="rover-signal" fill="none" stroke="#3d7c9c" stroke-dasharray="3 4"><path d="M51 17 Q80 -7 109 17"/><path d="M60 25 Q80 8 100 25"/></g>
+          </g>
+          <ellipse class="rover-scan" cx="71" cy="109" rx="13" ry="3" fill="none" stroke="#d9622b" stroke-width="1.5"/>
+        </svg>
         <h3>Ground truth</h3><p>The RTK rover logs cm-level points at the boundaries that the drone map can't settle.</p>
       </div>
       <div class="step rv">
