@@ -28,7 +28,7 @@
   --radius: 10px;
   --max: 1200px;
   --gutter: clamp(16px, 4vw, 44px);
-  --nav-h: 64px;
+  --nav-h: 76px;
 }
 
 * { box-sizing: border-box; }
@@ -74,13 +74,13 @@ em.hl { font-style: italic; color: var(--field); }
 
 /* ---------- nav ---------- */
 .nav { position: fixed; inset: 0 0 auto; z-index: 60; height: var(--nav-h); background: rgba(245, 239, 226, .86); backdrop-filter: blur(10px) saturate(1.2); -webkit-backdrop-filter: blur(10px) saturate(1.2); border-bottom: 1px solid var(--line); }
-.nav .wrap { width: min(1440px, 100% - 2 * var(--gutter)); height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+.nav .wrap { width: min(1600px, 100% - 2 * var(--gutter)); height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
 .brand { display: flex; align-items: center; gap: 12px; flex: none; }
 .brand img { height: 30px; width: auto; }
-.brand b { font-family: var(--font-display); font-weight: 700; font-size: 21px; letter-spacing: -.01em; }
+.brand b { font-family: var(--font-display); font-weight: 700; font-size: 25px; letter-spacing: -.01em; }
 .brand small { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .16em; color: var(--dim); text-transform: uppercase; border-left: 1px solid var(--line-2); padding-left: 12px; }
-.nav-links { display: flex; align-items: center; gap: 18px; flex: none; }
-.nav-links a { position: relative; font-size: 14.5px; font-weight: 500; color: var(--ink-2); white-space: nowrap; padding: 6px 0; }
+.nav-links { display: flex; align-items: center; gap: 20px; flex: none; }
+.nav-links a { position: relative; font-size: 16px; font-weight: 500; color: var(--ink-2); white-space: nowrap; padding: 6px 0; }
 .nav-links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: 0; height: 2px; background: var(--survey); transition: right .25s ease; }
 .nav-links a:hover::after, .nav-links a[aria-current="page"]::after { right: 0; }
 .nav-links a[aria-current="page"] { color: var(--field); }
@@ -93,7 +93,7 @@ em.hl { font-style: italic; color: var(--field); }
 .nav-menu i { display: block; width: 17px; height: 1.6px; background: var(--ink); border-radius: 2px; transition: transform .25s; }
 .nav.open .nav-menu i:first-child { transform: translateY(3.3px) rotate(45deg); }
 .nav.open .nav-menu i:last-child { transform: translateY(-3.3px) rotate(-45deg); }
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .nav-links { display: none; }
   .nav-menu { display: grid; }
   .nav.open .nav-links { display: flex; flex-direction: column; gap: 0; position: absolute; top: 100%; left: 0; right: 0; padding: 6px var(--gutter) 16px; background: var(--paper); border-bottom: 1px solid var(--line); box-shadow: 0 24px 40px -24px rgba(60, 45, 20, .35); }
@@ -399,7 +399,7 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
 .nav-hw svg.spin { animation: prop 1.6s linear infinite; }
 .nav-hw:hover svg.spin { animation-duration: .5s; }
 @keyframes prop { to { transform: rotate(360deg); } }
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
   .nav.open .nav-links a.nav-hw { justify-content: flex-start; margin: 10px 0 4px; padding: 13px 16px; border-bottom: 0; font-size: 16px; }
 }
 .hw-chip { position: absolute; right: 12px; bottom: 12px; z-index: 2; display: inline-flex; align-items: center; gap: 9px; padding: 10px 15px 10px 12px; border-radius: 99px; background: var(--ink); color: var(--paper); font-weight: 600; font-size: 14px; box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .6); transition: transform .2s, background .2s; }
@@ -412,7 +412,7 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
 @media (prefers-reduced-motion: reduce) { .nav-hw svg.spin, .hw-chip svg { animation: none; } }
 .nav-hw-m { display: none; align-items: center; gap: 6px; padding: 8px 12px; border-radius: 99px; background: var(--field); color: #fff; font-family: var(--font-mono); font-size: 13px; font-weight: 600; box-shadow: 0 0 0 3px rgba(47, 107, 58, .16); }
 .nav-hw-m svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 1.8; stroke-linejoin: round; }
-@media (max-width: 1100px) { .nav-hw-m { display: inline-flex; } }
+@media (max-width: 1200px) { .nav-hw-m { display: inline-flex; } }
 
 /* official problem statement text: long, so it scrolls in its own box */
 .ps-box { width: min(760px, 100%); }
@@ -539,7 +539,7 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
 .dashboard-live i { width: 6px; height: 6px; border-radius: 50%; background: currentColor; animation: dashboard-status 2s ease-in-out infinite; }
 .project-link:hover { transform: translateY(-3px); box-shadow: 0 0 0 4px rgba(47,107,58,.22), 0 12px 26px -14px rgba(30,42,32,.45); }
 @keyframes dashboard-status { 50% { opacity: .4; } }
-@media (min-width: 1101px) and (max-width: 1400px) { .nav-links { gap: 12px; } .nav-links a { font-size: 13px; } .brand small { display: none; } .nav .wrap { gap: 12px; } }
+@media (min-width: 1201px) and (max-width: 1500px) { .nav-links { gap: 16px; } .brand small { display: none; } .nav .wrap { gap: 16px; } }
 @media (max-width: 520px) { .nav-github { padding: 8px; } .nav-github span { display: none; } .project-link { padding: 17px 15px; gap: 12px; } .project-link > svg { width: 28px; height: 28px; } }
 @media (prefers-reduced-motion: reduce) { .dashboard-live i { animation: none; } .project-link, .nav-github { transition: none; } }
 /* Live IST clock, visible at every screen size. */
@@ -548,3 +548,15 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
 @media (max-width: 520px) { .nav-clock { padding: 7px 9px; font-size: 11px; gap: 6px; } .nav-right { gap: 7px; } .nav .wrap { gap: 8px; } .brand { gap: 7px; } }
 @media (max-width: 380px) { .nav-clock i { display: none; } .nav-clock { padding: 7px; font-size: 10px; } .nav-right { gap: 5px; } .nav-right .nav-hw-m { padding: 7px; } .nav-menu { width: 32px; } }
 @media (prefers-reduced-motion: reduce) { .nav-clock i { animation: none; } }
+/* Larger, more readable header controls. */
+.nav-github { padding: 10px 16px; font-size: 16px; }
+.nav-github svg { width: 22px; height: 22px; }
+.nav-clock { padding: 10px 16px; font-size: 14px; }
+.nav-links a.nav-hw { padding: 10px 16px; }
+@media (max-width: 520px) {
+  .brand b { font-size: 21px; }
+  .nav-github { padding: 8px; }
+  .nav-github svg { width: 19px; height: 19px; }
+  .nav-clock { padding: 7px 9px; font-size: 11px; }
+}
+@media (max-width: 380px) { .nav-clock { padding: 7px; font-size: 10px; } }
