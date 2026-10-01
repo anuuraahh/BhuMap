@@ -3,7 +3,6 @@
    and look like the CAD renders. Drag to turn, pick a part to highlight it. */
 (() => {
   const d = document, host = d.querySelector("[data-viewer]");
-  if (!host) return;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- vector helpers ---------- */
@@ -112,6 +111,9 @@
     [[.55, -.45], [-.55, -.45]].forEach(([x, z]) => { m.beam([0, 1.0, 0], [x, 0, z], .05, "#8d9297", 3); m.box([x, .02, z], [.14, .04, .14], "#26292b", 3); });
     return m;
   }
+
+  window.BhuMap3D = { buildDrone, buildRover, props, DRONE_PARTS, ROVER_PARTS };   // reused by the video
+  if (!host) return;
 
   /* ---------- renderer ---------- */
   const canvas = host.querySelector("canvas"), ctx = canvas.getContext("2d");
