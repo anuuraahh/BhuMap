@@ -501,3 +501,24 @@ table.cmp tr:last-child td, table.cmp tr:last-child th { border-bottom: 0; }
 @keyframes rover-signal { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
 @keyframes rover-scan { from { transform: scale(.5); opacity: 1; } to { transform: scale(1.8); opacity: 0; } }
 @media (prefers-reduced-motion: reduce) { .rover-step .rover-drive, .rover-step .rover-wheel, .rover-step .rover-signal, .rover-step .rover-scan { animation: none; } }
+/* Matching motion for capture, verification and record sync. */
+.drone-step .drone-hover { animation: step-hover 3s ease-in-out infinite; }
+.drone-step .step-prop { animation: step-prop .7s linear infinite; }
+.drone-step .capture-area { animation: capture-pulse 2s ease-in-out infinite; }
+.drone-step .capture-beam { animation: step-dashes 1s linear infinite; }
+.verify-step .tablet-float, .sync-step .parcel-float { animation: step-hover 3s ease-in-out infinite; }
+.verify-step .tablet-boundary, .sync-step .sync-flow { animation: step-dashes 1.2s linear infinite; }
+.verify-step .tablet-signature { stroke-dasharray: 1; animation: signature-draw 3s ease-in-out infinite; }
+.verify-step .tablet-check { transform-origin: 124px 92px; animation: check-pulse 3s ease-in-out infinite; }
+.sync-step .sync-record { animation: record-pulse 2.4s ease-in-out infinite; }
+@keyframes step-hover { 0%, 100% { transform: translate(-3px, 0); } 50% { transform: translate(3px, -3px); } }
+@keyframes step-prop { to { transform: rotate(360deg); } }
+@keyframes capture-pulse { 0%, 100% { fill-opacity: .5; } 50% { fill-opacity: 1; } }
+@keyframes step-dashes { to { stroke-dashoffset: -14; } }
+@keyframes signature-draw { 0%, 10% { stroke-dashoffset: 1; } 55%, 90% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 1; } }
+@keyframes check-pulse { 0%, 40%, 100% { transform: scale(1); } 60% { transform: scale(1.12); } }
+@keyframes record-pulse { 0%, 70%, 100% { fill: #fbf8f1; stroke: #1e2a20; } 30% { fill: #dfe8d2; stroke: #2f6b3a; } }
+@media (prefers-reduced-motion: reduce) {
+  .drone-step *, .verify-step *, .sync-step * { animation: none !important; }
+  .verify-step .tablet-signature { stroke-dashoffset: 0; }
+}
